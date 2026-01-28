@@ -2,114 +2,584 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CheesyHamburger Clan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background: #fff2e6; padding: 20px; }
-        h1 { color: #d35400; }
-        .tabs { margin-top: 20px; }
-        button { margin-right: 5px; padding: 5px 10px; cursor: pointer; }
-        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        th { background-color: #f39c12; color: white; }
-        tr:nth-child(even) { background-color: #f9e5d2; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brown-dark: #65300a;
+            --yellow-primary: #ffc218;
+            --yellow-light: #fff9a6;
+            --orange-accent: #ff8c42;
+            --cream: #fff5e1;
+            --shadow-glow: rgba(255, 194, 24, 0.3);
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #1a0a03 0%, var(--brown-dark) 50%, #2d1506 100%);
+            color: var(--cream);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 194, 24, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 140, 66, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--yellow-primary), var(--orange-accent));
+            padding: 5px;
+            box-shadow: 
+                0 0 40px var(--shadow-glow),
+                0 0 80px rgba(255, 194, 24, 0.2);
+            position: relative;
+        }
+
+        .logo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--brown-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            border: 3px solid var(--yellow-light);
+        }
+
+        .clan-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--yellow-light), var(--yellow-primary), var(--orange-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px var(--shadow-glow);
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .clan-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: rgba(255, 194, 24, 0.05);
+            border: 2px solid rgba(255, 194, 24, 0.3);
+            padding: 15px 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 194, 24, 0.1);
+            border-color: var(--yellow-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow-glow);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--yellow-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--yellow-primary);
+        }
+
+        /* Tabs Navigation */
+        .tabs-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 15px 35px;
+            background: rgba(255, 194, 24, 0.05);
+            border: 2px solid rgba(255, 194, 24, 0.3);
+            color: var(--yellow-light);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            background: rgba(255, 194, 24, 0.15);
+            border-color: var(--yellow-primary);
+            box-shadow: 0 0 20px var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--yellow-primary), var(--orange-accent));
+            border-color: var(--yellow-primary);
+            color: var(--brown-dark);
+            box-shadow: 0 0 30px var(--shadow-glow);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Table Styles */
+        .table-container {
+            background: rgba(101, 48, 10, 0.3);
+            border: 2px solid rgba(255, 194, 24, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--yellow-primary), var(--orange-accent));
+        }
+
+        th {
+            padding: 20px;
+            text-align: left;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--brown-dark);
+            font-size: 0.95rem;
+            border-bottom: 3px solid var(--brown-dark);
+        }
+
+        th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        tbody tr {
+            background: rgba(255, 245, 225, 0.03);
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(255, 194, 24, 0.1);
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 194, 24, 0.1);
+            box-shadow: 0 2px 10px rgba(255, 194, 24, 0.15);
+        }
+
+        td {
+            padding: 18px 20px;
+            color: var(--cream);
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+
+        tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 15px;
+        }
+
+        tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 15px;
+        }
+
+        /* War Sub-tabs */
+        .war-subtabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .war-subtab-button {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            background: rgba(255, 194, 24, 0.05);
+            border: 1px solid rgba(255, 194, 24, 0.2);
+            color: var(--yellow-light);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .war-subtab-button:hover {
+            background: rgba(255, 194, 24, 0.15);
+            border-color: var(--yellow-primary);
+            transform: translateY(-1px);
+        }
+
+        .war-subtab-button.active {
+            background: var(--yellow-primary);
+            color: var(--brown-dark);
+            border-color: var(--yellow-primary);
+        }
+
+        /* Role Badge */
+        .role-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .role-leader { background: linear-gradient(135deg, #FFD700, #FFA500); color: var(--brown-dark); }
+        .role-coleader { background: linear-gradient(135deg, #FF8C42, #FF6B35); color: white; }
+        .role-elder { background: linear-gradient(135deg, #87CEEB, #4682B4); color: white; }
+        .role-member { background: rgba(255, 255, 255, 0.2); color: var(--cream); }
+
+        /* Rank Badge */
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--yellow-primary), var(--orange-accent));
+            color: var(--brown-dark);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 1.3rem;
+            color: var(--yellow-primary);
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .clan-title {
+                font-size: 2.5rem;
+            }
+
+            .clan-stats {
+                gap: 20px;
+            }
+
+            .stat-item {
+                padding: 12px 20px;
+            }
+
+            th, td {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            .tab-button {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Trophy/Points styling */
+        .trophy-count {
+            color: var(--yellow-primary);
+            font-weight: 600;
+        }
+
+        .points-count {
+            color: var(--orange-accent);
+            font-weight: 600;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
-    <h1>CheesyHamburger Clan</h1>
-
-    <!-- Clan Members Tab -->
-    <div>
-        <h2>Members</h2>
-        <p id="clanInfo"></p>
-        <table id="membersTable">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Trophies</th>
-                    <th>Donations</th>
-                    <th>Role</th>
-                    <th>Arena</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-
-    <!-- War Stats Tab -->
-    <div class="tabs">
-        <h2>War Stats</h2>
-        <div id="warTabs">
-            <button onclick="showWar('current')">Current War</button>
-            <button onclick="showWar(0)">War 1</button>
-            <button onclick="showWar(1)">War 2</button>
-            <button onclick="showWar(2)">War 3</button>
-            <button onclick="showWar(3)">War 4</button>
-            <button onclick="showWar(4)">War 5</button>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-inner">
+                    <!-- Add your logo image here -->
+                    🍔
+                </div>
+            </div>
+            <h1 class="clan-title">CHEESYHAMBURGER</h1>
+            <div class="clan-stats" id="clanStats">
+                <div class="stat-item">
+                    <div class="stat-label">Clan Score</div>
+                    <div class="stat-value" id="clanScore">—</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Members</div>
+                    <div class="stat-value" id="membersCount">—</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Donations/Week</div>
+                    <div class="stat-value" id="donationsWeek">—</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Required Trophies</div>
+                    <div class="stat-value" id="requiredTrophies">—</div>
+                </div>
+            </div>
         </div>
 
-        <table id="warTable">
-            <thead>
-                <tr>
-                    <th>Member</th>
-                    <th>Points</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <!-- Main Tabs -->
+        <div class="tabs-nav">
+            <button class="tab-button active" onclick="switchTab('members')">Members</button>
+            <button class="tab-button" onclick="switchTab('wars')">War Stats</button>
+        </div>
+
+        <!-- Members Tab -->
+        <div id="membersTab" class="tab-content active">
+            <div class="table-container">
+                <table id="membersTable">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Trophies</th>
+                            <th>Donations</th>
+                            <th>Role</th>
+                            <th>Arena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6" class="loading">Loading members</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- War Stats Tab -->
+        <div id="warsTab" class="tab-content">
+            <div class="war-subtabs" id="warSubtabs">
+                <button class="war-subtab-button active" onclick="showWar('current')">Current War</button>
+                <button class="war-subtab-button" onclick="showWar(0)">War 1</button>
+                <button class="war-subtab-button" onclick="showWar(1)">War 2</button>
+                <button class="war-subtab-button" onclick="showWar(2)">War 3</button>
+                <button class="war-subtab-button" onclick="showWar(3)">War 4</button>
+                <button class="war-subtab-button" onclick="showWar(4)">War 5</button>
+            </div>
+
+            <div class="table-container">
+                <table id="warTable">
+                    <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="loading">Loading war data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script>
-        // -------- Members Table --------
+        // Tab switching
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Load clan members
         fetch('clan_data.json')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('clanInfo').innerText =
-                    `Clan Score: ${data.clanScore} | Members: ${data.members} | Donations/Week: ${data.donationsPerWeek} | Required Trophies: ${data.requiredTrophies}`;
+                // Update stats
+                document.getElementById('clanScore').textContent = data.clanScore?.toLocaleString() || '—';
+                document.getElementById('membersCount').textContent = data.members || '—';
+                document.getElementById('donationsWeek').textContent = data.donationsPerWeek?.toLocaleString() || '—';
+                document.getElementById('requiredTrophies').textContent = data.requiredTrophies?.toLocaleString() || '—';
 
+                // Populate members table
                 const tbody = document.querySelector('#membersTable tbody');
+                tbody.innerHTML = '';
+
                 data.memberList.forEach(member => {
                     const tr = document.createElement('tr');
+                    
+                    const roleClass = `role-${member.role.toLowerCase()}`;
+                    
                     tr.innerHTML = `
-                        <td>${member.clanRank}</td>
+                        <td><span class="rank-badge">${member.clanRank}</span></td>
                         <td>${member.name}</td>
-                        <td>${member.trophies}</td>
-                        <td>${member.donations}</td>
-                        <td>${member.role}</td>
+                        <td><span class="trophy-count">${member.trophies.toLocaleString()}</span></td>
+                        <td>${member.donations.toLocaleString()}</td>
+                        <td><span class="role-badge ${roleClass}">${member.role}</span></td>
                         <td>${member.arena.name}</td>
                     `;
                     tbody.appendChild(tr);
                 });
+            })
+            .catch(error => {
+                console.error('Error loading clan data:', error);
+                document.querySelector('#membersTable tbody').innerHTML = 
+                    '<tr><td colspan="6" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
             });
 
-        // -------- War Stats Table --------
+        // Load war data
         let warData = {};
         fetch('war_data.json')
             .then(response => response.json())
             .then(data => {
                 warData = data;
-                showWar('current'); // default to current war
+                showWar('current');
+            })
+            .catch(error => {
+                console.error('Error loading war data:', error);
+                document.querySelector('#warTable tbody').innerHTML = 
+                    '<tr><td colspan="2" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
             });
 
         function showWar(tab) {
+            // Update subtab buttons
+            document.querySelectorAll('.war-subtab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
             const tbody = document.querySelector('#warTable tbody');
             tbody.innerHTML = '';
 
             let participants = [];
-            if(tab === 'current'){
+            if (tab === 'current') {
                 participants = warData.currentWar ? warData.currentWar.participants : [];
             } else {
-                participants = warData.previousWars && warData.previousWars[tab] ? warData.previousWars[tab].participants : [];
+                participants = warData.previousWars && warData.previousWars[tab] 
+                    ? warData.previousWars[tab].participants 
+                    : [];
             }
 
-            if(participants.length === 0){
-                tbody.innerHTML = '<tr><td colspan="2">No data available</td></tr>';
+            if (participants.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="2" style="text-align: center;">No data available</td></tr>';
                 return;
             }
 
-            participants.forEach(p => {
+            // Sort by points descending
+            participants.sort((a, b) => b.points - a.points);
+
+            participants.forEach((p, index) => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${p.name}</td><td>${p.points}</td>`;
+                tr.innerHTML = `
+                    <td><span class="rank-badge">${index + 1}</span> ${p.name}</td>
+                    <td><span class="points-count">${p.points.toLocaleString()}</span></td>
+                `;
                 tbody.appendChild(tr);
             });
         }
