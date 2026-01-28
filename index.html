@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CheesyHamburger Clan</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fff2e6; padding: 20px; }
+        h1 { color: #d35400; }
+        .tabs { margin-top: 20px; }
+        button { margin-right: 5px; padding: 5px 10px; cursor: pointer; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #f39c12; color: white; }
+        tr:nth-child(even) { background-color: #f9e5d2; }
+    </style>
+</head>
+<body>
+    <h1>CheesyHamburger Clan</h1>
+
+    <!-- Clan Members Tab -->
+    <div>
+        <h2>Members</h2>
+        <p id="clanInfo"></p>
+        <table id="membersTable">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Trophies</th>
+                    <th>Donations</th>
+                    <th>Role</th>
+                    <th>Arena</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- War Stats Tab -->
+    <div class="tabs">
+        <h2>War Stats</h2>
+        <div id="warTabs">
+            <button onclick="showWar('current')">Current War</button>
+            <button onclick="showWar(0)">War 1</button>
+            <button onclick="showWar(1)">War 2</button>
+            <button onclick="showWar(2)">War 3</button>
+            <button onclick="showWar(3)">War 4</button>
+            <button onclick="showWar(4)">War 5</button>
+        </div>
+
+        <table id="warTable">
+            <thead>
+                <tr>
+                    <th>Member</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        // -------- Members Table --------
+        fetch('clan_data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('clanInfo').innerText =
+                    `Clan Score: ${data.clanScore} | Members: ${data.members} | Donations/Week: ${data.donationsPerWeek} | Required Trophies: ${data.requiredTrophies}`;
+
+                const tbody = document.querySelector('#membersTable tbody');
+                data.memberList.forEach(member => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${member.clanRank}</td>
+                        <td>${member.name}</td>
+                        <td>${member.trophies}</td>
+                        <td>${member.donations}</td>
+                        <td>${member.role}</td>
+                        <td>${member.arena.name}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            });
+
+        // -------- War Stats Table --------
+        let warData = {};
+        fetch('war_data.json')
+            .then(response => response.json())
+            .then(data => {
+                warData = data;
+                showWar('current'); // default to current war
+            });
+
+        function showWar(tab) {
+            const tbody = document.querySelector('#warTable tbody');
+            tbody.innerHTML = '';
+
+            let participants = [];
+            if(tab === 'current'){
+                participants = warData.currentWar ? warData.currentWar.participants : [];
+            } else {
+                participants = warData.previousWars && warData.previousWars[tab] ? warData.previousWars[tab].participants : [];
+            }
+
+            if(participants.length === 0){
+                tbody.innerHTML = '<tr><td colspan="2">No data available</td></tr>';
+                return;
+            }
+
+            participants.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${p.name}</td><td>${p.points}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>
