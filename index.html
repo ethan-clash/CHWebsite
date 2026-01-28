@@ -63,8 +63,8 @@
         }
 
         .logo-container {
-            width: 150px;
-            height: 150px;
+            width: 300px;
+            height: 300px;
             margin: 0 auto 30px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--yellow-primary), var(--orange-accent));
@@ -85,6 +85,13 @@
             justify-content: center;
             font-size: 48px;
             border: 3px solid var(--yellow-light);
+            overflow: hidden;
+        }
+
+        .logo-inner img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
         }
 
         .clan-title {
@@ -399,7 +406,7 @@
             <div class="logo-container">
                 <div class="logo-inner">
                     <!-- Add your logo image here -->
-                    🍔
+                    <img src="clan_logo.png" alt="Clan Logo" />
                 </div>
             </div>
             <h1 class="clan-title">CHEESYHAMBURGER</h1>
@@ -425,8 +432,8 @@
 
         <!-- Main Tabs -->
         <div class="tabs-nav">
-            <button class="tab-button active" onclick="switchTab('members')">Members</button>
-            <button class="tab-button" onclick="switchTab('wars')">War Stats</button>
+            <button class="tab-button active" onclick="switchTab('members', event)">Members</button>
+            <button class="tab-button" onclick="switchTab('wars', event)">War Stats</button>
         </div>
 
         <!-- Members Tab -->
@@ -455,25 +462,22 @@
         <!-- War Stats Tab -->
         <div id="warsTab" class="tab-content">
             <div class="war-subtabs" id="warSubtabs">
-                <button class="war-subtab-button active" onclick="showWar('current')">Current War</button>
-                <button class="war-subtab-button" onclick="showWar(0)">War 1</button>
-                <button class="war-subtab-button" onclick="showWar(1)">War 2</button>
-                <button class="war-subtab-button" onclick="showWar(2)">War 3</button>
-                <button class="war-subtab-button" onclick="showWar(3)">War 4</button>
-                <button class="war-subtab-button" onclick="showWar(4)">War 5</button>
+                <button class="war-subtab-button active" onclick="showWar(0)">Previous War</button>
+                <button class="war-subtab-button" onclick="showWar(1)">War Before That</button>
             </div>
 
             <div class="table-container">
                 <table id="warTable">
                     <thead>
                         <tr>
+                            <th>Rank</th>
                             <th>Member</th>
                             <th>Points</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="2" class="loading">Loading war data</td>
+                            <td colspan="3" class="loading">Loading war data</td>
                         </tr>
                     </tbody>
                 </table>
@@ -483,19 +487,31 @@
 
     <script>
         // Tab switching
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+        function switchTab(tabName, event) {
+    // Update main tab buttons
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
 
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(tabName + 'Tab').classList.add('active');
+    // Update tab content
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(tabName + 'Tab').classList.add('active');
+
+    // If "wars" tab is clicked, show default previous war
+    if (tabName === 'wars') {
+        const warSubtabs = document.querySelectorAll('.war-subtab-button');
+        if (warSubtabs.length > 0) {
+            // Remove active from all subtabs
+            warSubtabs.forEach(btn => btn.classList.remove('active'));
+            // Set the first subtab (Previous War) as active
+            warSubtabs[0].classList.add('active');
         }
+
+        // Load the first war (Previous War)
+        showWar(0);
+    }
+}
+
+
 
         // Load clan members
         fetch('clan_data.json')
@@ -539,15 +555,15 @@
             .then(response => response.json())
             .then(data => {
                 warData = data;
-                showWar('current');
+                showWar(0); // Default to previous war
             })
             .catch(error => {
                 console.error('Error loading war data:', error);
                 document.querySelector('#warTable tbody').innerHTML = 
-                    '<tr><td colspan="2" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
+                    '<tr><td colspan="3" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
             });
 
-        function showWar(tab) {
+        function showWar(warIndex) {
             // Update subtab buttons
             document.querySelectorAll('.war-subtab-button').forEach(btn => {
                 btn.classList.remove('active');
@@ -558,16 +574,12 @@
             tbody.innerHTML = '';
 
             let participants = [];
-            if (tab === 'current') {
-                participants = warData.currentWar ? warData.currentWar.participants : [];
-            } else {
-                participants = warData.previousWars && warData.previousWars[tab] 
-                    ? warData.previousWars[tab].participants 
-                    : [];
+            if (warData.previousWars && warData.previousWars[warIndex]) {
+                participants = warData.previousWars[warIndex].participants || [];
             }
 
             if (participants.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="2" style="text-align: center;">No data available</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align: center;">No data available</td></tr>';
                 return;
             }
 
@@ -577,7 +589,8 @@
             participants.forEach((p, index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td><span class="rank-badge">${index + 1}</span> ${p.name}</td>
+                    <td><span class="rank-badge">${index + 1}</span></td>
+                    <td>${p.name}</td>
                     <td><span class="points-count">${p.points.toLocaleString()}</span></td>
                 `;
                 tbody.appendChild(tr);

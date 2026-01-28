@@ -3,7 +3,8 @@ import json
 import os
 
 # ======= CONFIG =======
-CLAN_TAG = "%23YQY9R8PP"  # Replace # with %23
+CLAN_TAG = "%23YQY9R8PP"  # Replace # with %23 for API URLs
+CLAN_TAG_DECODED = "#YQY9R8PP"  # Decoded version for comparison
 API_KEY = os.getenv("CLASH_API_KEY")  # Must be set as an environment variable
 CLAN_OUTPUT = "clan_data.json"
 WAR_OUTPUT = "war_data.json"
@@ -34,34 +35,45 @@ with open(CLAN_OUTPUT, "w") as f:
     json.dump(clan_data, f, indent=4)
 print(f"Saved clan info + {len(members_data['items'])} members to {CLAN_OUTPUT}")
 
-# ---- Fetch current River Race ----
-current_race_url = f"https://api.clashroyale.com/v1/clans/{CLAN_TAG}/currentriverrace"
-current_race_response = requests.get(current_race_url, headers=headers)
-
-war_data = {"currentWar": None, "previousWars": []}
-
-if current_race_response.status_code == 200:
-    current_race = current_race_response.json()
-    participants = current_race.get("clan", {}).get("participants", [])
-    if participants:
-        war_data["currentWar"] = {
-            "startTime": current_race.get("collectionEndTime"),
-            "endTime": current_race.get("warEndTime"),
-            "participants": [{"name": p["name"], "points": p["fame"]} for p in participants]
-        }
-
-# ---- Fetch previous River Races ----
-riverrace_log_url = f"https://api.clashroyale.com/v1/clans/{CLAN_TAG}/riverracelog"
+# ---- Fetch River Race Log (last 2 wars) ----
+riverrace_log_url = f"https://api.clashroyale.com/v1/clans/{CLAN_TAG}/riverracelog?limit=2"
 log_response = requests.get(riverrace_log_url, headers=headers)
+
+war_data = {"previousWars": []}
+
 if log_response.status_code == 200:
     log_data = log_response.json()
-    previous_races = log_data.get("items", [])[:5]  # last 5 wars
+    previous_races = log_data.get("items", [])
+    
+    print(f"Found {len(previous_races)} previous wars")
+    
     for race in previous_races:
-        participants = race.get("clan", {}).get("participants", [])
-        war_data["previousWars"].append({
-            "date": race.get("createdDate"),
-            "participants": [{"name": p["name"], "points": p["fame"]} for p in participants]
-        })
+        # Find your clan in the standings
+        standings = race.get("standings", [])
+        your_clan_data = None
+        
+        for standing in standings:
+            clan_info = standing.get("clan", {})
+            if clan_info.get("tag") == CLAN_TAG_DECODED:
+                your_clan_data = clan_info
+                break
+        
+        if your_clan_data:
+            participants = your_clan_data.get("participants", [])
+            print(f"War on {race.get('createdDate')}: {len(participants)} participants")
+            
+            war_data["previousWars"].append({
+                "date": race.get("createdDate"),
+                "participants": [{"name": p["name"], "points": p["fame"]} for p in participants]
+            })
+        else:
+            print(f"Warning: Could not find clan {CLAN_TAG_DECODED} in standings for war on {race.get('createdDate')}")
+            war_data["previousWars"].append({
+                "date": race.get("createdDate"),
+                "participants": []
+            })
+else:
+    print(f"Error fetching river race log: {log_response.status_code}")
 
 # ---- Save war data ----
 with open(WAR_OUTPUT, "w") as f:
