@@ -59,7 +59,7 @@
             text-align: center;
             padding: 60px 20px;
             position: relative;
-            margin-bottom: 40px;
+            margin-bottom: -35px;
         }
 
         .logo-container {
@@ -397,9 +397,141 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Discord Button - Top Right */
+        .discord-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 4px 15px rgba(88, 101, 242, 0.4),
+                0 0 30px rgba(88, 101, 242, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .discord-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 6px 25px rgba(88, 101, 242, 0.6),
+                0 0 40px rgba(88, 101, 242, 0.4);
+        }
+
+        .discord-button svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* Join Community Section */
+        .join-community {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(114, 137, 218, 0.05));
+            border: 2px solid rgba(88, 101, 242, 0.3);
+            border-radius: 15px;
+            padding: 25px 30px;
+            margin: 0 0 30px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .join-community:hover {
+            border-color: #5865F2;
+            box-shadow: 0 8px 30px rgba(88, 101, 242, 0.2);
+        }
+
+        .join-community h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .join-community p {
+            color: var(--cream);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            opacity: 0.9;
+        }
+
+        .join-community-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .join-community-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(88, 101, 242, 0.6);
+        }
+
+        .join-community-button svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        @media (max-width: 768px) {
+            .discord-button {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .discord-button svg {
+                width: 26px;
+                height: 26px;
+            }
+
+            .join-community {
+                padding: 20px 15px;
+            }
+
+            .join-community h2 {
+                font-size: 1.2rem;
+            }
+
+            .join-community p {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Discord Button - Top Right -->
+    <a href="https://discord.gg/R52Bp49MhS" target="_blank" rel="noopener noreferrer" class="discord-button" aria-label="Join our Discord">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+        </svg>
+    </a>
+
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -428,6 +560,18 @@
                     <div class="stat-value" id="requiredTrophies">—</div>
                 </div>
             </div>
+        </div>
+
+        <!-- Join Community Section -->
+        <div class="join-community">
+            <h2>Join Our Community</h2>
+            <p>Connect with clan members, coordinate strategies, and stay updated on clan events!</p>
+            <a href="https://discord.gg/R52Bp49MhS" target="_blank" rel="noopener noreferrer" class="join-community-button">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+                Join Discord
+            </a>
         </div>
 
         <!-- Main Tabs -->
@@ -472,12 +616,13 @@
                         <tr>
                             <th>Rank</th>
                             <th>Member</th>
+                            <th>Role</th>
                             <th>Points</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="3" class="loading">Loading war data</td>
+                            <td colspan="4" class="loading">Loading war data</td>
                         </tr>
                     </tbody>
                 </table>
@@ -488,30 +633,14 @@
     <script>
         // Tab switching
         function switchTab(tabName, event) {
-    // Update main tab buttons
-    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+            // Update main tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
 
-    // Update tab content
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-    document.getElementById(tabName + 'Tab').classList.add('active');
-
-    // If "wars" tab is clicked, show default previous war
-    if (tabName === 'wars') {
-        const warSubtabs = document.querySelectorAll('.war-subtab-button');
-        if (warSubtabs.length > 0) {
-            // Remove active from all subtabs
-            warSubtabs.forEach(btn => btn.classList.remove('active'));
-            // Set the first subtab (Previous War) as active
-            warSubtabs[0].classList.add('active');
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName + 'Tab').classList.add('active');
         }
-
-        // Load the first war (Previous War)
-        showWar(0);
-    }
-}
-
-
 
         // Load clan members
         fetch('clan_data.json')
@@ -523,11 +652,16 @@
                 document.getElementById('donationsWeek').textContent = data.donationsPerWeek?.toLocaleString() || '—';
                 document.getElementById('requiredTrophies').textContent = data.requiredTrophies?.toLocaleString() || '—';
 
-                // Populate members table
+                // Populate members table and track current member names
                 const tbody = document.querySelector('#membersTable tbody');
                 tbody.innerHTML = '';
 
                 data.memberList.forEach(member => {
+                    // Add member name to the set of current members
+                    currentMemberNames.add(member.name);
+                    // Store member data in map for war stats
+                    currentMembersMap.set(member.name, member);
+                    
                     const tr = document.createElement('tr');
                     
                     const roleClass = `role-${member.role.toLowerCase()}`;
@@ -551,6 +685,9 @@
 
         // Load war data
         let warData = {};
+        let currentMemberNames = new Set();
+        let currentMembersMap = new Map(); // Map of member name to their full data
+        
         fetch('war_data.json')
             .then(response => response.json())
             .then(data => {
@@ -560,15 +697,17 @@
             .catch(error => {
                 console.error('Error loading war data:', error);
                 document.querySelector('#warTable tbody').innerHTML = 
-                    '<tr><td colspan="3" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
+                    '<tr><td colspan="4" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
             });
 
         function showWar(warIndex) {
-            // Update subtab buttons
-            document.querySelectorAll('.war-subtab-button').forEach(btn => {
+            // Update subtab buttons - this now works whether called from click or programmatically
+            document.querySelectorAll('.war-subtab-button').forEach((btn, index) => {
                 btn.classList.remove('active');
+                if (index === warIndex) {
+                    btn.classList.add('active');
+                }
             });
-            event.target.classList.add('active');
 
             const tbody = document.querySelector('#warTable tbody');
             tbody.innerHTML = '';
@@ -578,8 +717,11 @@
                 participants = warData.previousWars[warIndex].participants || [];
             }
 
+            // Filter out participants who are no longer in the clan
+            participants = participants.filter(p => currentMemberNames.has(p.name));
+
             if (participants.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" style="text-align: center;">No data available</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">No data available</td></tr>';
                 return;
             }
 
@@ -588,9 +730,16 @@
 
             participants.forEach((p, index) => {
                 const tr = document.createElement('tr');
+                
+                // Get member data to find their role
+                const memberData = currentMembersMap.get(p.name);
+                const role = memberData ? memberData.role : 'Member';
+                const roleClass = `role-${role.toLowerCase()}`;
+                
                 tr.innerHTML = `
                     <td><span class="rank-badge">${index + 1}</span></td>
                     <td>${p.name}</td>
+                    <td><span class="role-badge ${roleClass}">${role}</span></td>
                     <td><span class="points-count">${p.points.toLocaleString()}</span></td>
                 `;
                 tbody.appendChild(tr);
