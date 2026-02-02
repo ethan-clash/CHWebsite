@@ -1,6 +1,291 @@
 {
     "previousWars": [
         {
+            "date": "20260202T093703.000Z",
+            "participants": [
+                {
+                    "name": "spooderman",
+                    "points": 0
+                },
+                {
+                    "name": "King B",
+                    "points": 0
+                },
+                {
+                    "name": "Jay54",
+                    "points": 0
+                },
+                {
+                    "name": "Captain Falcon",
+                    "points": 0
+                },
+                {
+                    "name": "JEFF",
+                    "points": 0
+                },
+                {
+                    "name": "stupidhoe6694",
+                    "points": 0
+                },
+                {
+                    "name": "ryancoldo",
+                    "points": 0
+                },
+                {
+                    "name": "Lil BJ",
+                    "points": 0
+                },
+                {
+                    "name": "AstroLord47",
+                    "points": 0
+                },
+                {
+                    "name": "Leo\u271e",
+                    "points": 0
+                },
+                {
+                    "name": "cosmos azz",
+                    "points": 0
+                },
+                {
+                    "name": "LilPancake\u30b7",
+                    "points": 0
+                },
+                {
+                    "name": "BigJigglyDog",
+                    "points": 0
+                },
+                {
+                    "name": "MastaJones",
+                    "points": 0
+                },
+                {
+                    "name": "Joxdan",
+                    "points": 0
+                },
+                {
+                    "name": "Waleed OP~",
+                    "points": 0
+                },
+                {
+                    "name": "<c9>Jefe",
+                    "points": 0
+                },
+                {
+                    "name": "da iz g",
+                    "points": 0
+                },
+                {
+                    "name": "spreen",
+                    "points": 0
+                },
+                {
+                    "name": "WZ",
+                    "points": 0
+                },
+                {
+                    "name": "ThisIsMe",
+                    "points": 0
+                },
+                {
+                    "name": "awhirlclaimless",
+                    "points": 0
+                },
+                {
+                    "name": "liljuulski",
+                    "points": 0
+                },
+                {
+                    "name": "FarFoosa",
+                    "points": 0
+                },
+                {
+                    "name": "sam",
+                    "points": 0
+                },
+                {
+                    "name": "Kaden9",
+                    "points": 0
+                },
+                {
+                    "name": "Jazzydonut42",
+                    "points": 0
+                },
+                {
+                    "name": "Bighomiequeso",
+                    "points": 0
+                },
+                {
+                    "name": "daniel",
+                    "points": 0
+                },
+                {
+                    "name": "<c5>ki<c6>ng",
+                    "points": 0
+                },
+                {
+                    "name": "queen",
+                    "points": 0
+                },
+                {
+                    "name": "ilukiepukie",
+                    "points": 0
+                },
+                {
+                    "name": "Joey7494",
+                    "points": 0
+                },
+                {
+                    "name": "slave",
+                    "points": 0
+                },
+                {
+                    "name": "Ho3eiN",
+                    "points": 0
+                },
+                {
+                    "name": "charamaya",
+                    "points": 0
+                },
+                {
+                    "name": "jm.s561",
+                    "points": 200
+                },
+                {
+                    "name": "red vines",
+                    "points": 200
+                },
+                {
+                    "name": "Lilboylee",
+                    "points": 400
+                },
+                {
+                    "name": "frxsty",
+                    "points": 500
+                },
+                {
+                    "name": "Mr.Chev",
+                    "points": 600
+                },
+                {
+                    "name": "declanthepigeon",
+                    "points": 800
+                },
+                {
+                    "name": "dogmonkey",
+                    "points": 850
+                },
+                {
+                    "name": "eThAn",
+                    "points": 1000
+                },
+                {
+                    "name": "Aevis",
+                    "points": 1100
+                },
+                {
+                    "name": "PapaGeg",
+                    "points": 1100
+                },
+                {
+                    "name": "GK2027",
+                    "points": 1100
+                },
+                {
+                    "name": "door041enormous",
+                    "points": 1100
+                },
+                {
+                    "name": "\u3164\u3164\u3164\u3164\u3164",
+                    "points": 1100
+                },
+                {
+                    "name": "Patrick12",
+                    "points": 1200
+                },
+                {
+                    "name": "Morlyn71",
+                    "points": 1250
+                },
+                {
+                    "name": "giannamomma",
+                    "points": 1300
+                },
+                {
+                    "name": "Adchang",
+                    "points": 1400
+                },
+                {
+                    "name": "rebel",
+                    "points": 1700
+                },
+                {
+                    "name": "Gideon",
+                    "points": 1850
+                },
+                {
+                    "name": "itrolleveryday",
+                    "points": 1900
+                },
+                {
+                    "name": "FaelinJonez",
+                    "points": 2000
+                },
+                {
+                    "name": "lew",
+                    "points": 2000
+                },
+                {
+                    "name": "jay#1",
+                    "points": 2200
+                },
+                {
+                    "name": "cole",
+                    "points": 2200
+                },
+                {
+                    "name": "<c6>Jayden",
+                    "points": 2300
+                },
+                {
+                    "name": "Buttluck",
+                    "points": 2300
+                },
+                {
+                    "name": "Darth Yoda",
+                    "points": 2300
+                },
+                {
+                    "name": "[Demon Days]",
+                    "points": 2350
+                },
+                {
+                    "name": "genos",
+                    "points": 2500
+                },
+                {
+                    "name": "Aeon^Flux",
+                    "points": 2600
+                },
+                {
+                    "name": "will-easy",
+                    "points": 2600
+                },
+                {
+                    "name": "Chuy ;]",
+                    "points": 2650
+                },
+                {
+                    "name": "PB_DINO3",
+                    "points": 3000
+                },
+                {
+                    "name": "cjyd",
+                    "points": 3300
+                }
+            ]
+        },
+        {
             "date": "20260126T093706.000Z",
             "participants": [
                 {
@@ -230,215 +515,6 @@
                 {
                     "name": "cjyd",
                     "points": 2850
-                }
-            ]
-        },
-        {
-            "date": "20260119T093706.000Z",
-            "participants": [
-                {
-                    "name": "spooderman",
-                    "points": 0
-                },
-                {
-                    "name": "ryancoldo",
-                    "points": 0
-                },
-                {
-                    "name": "AstroLord47",
-                    "points": 0
-                },
-                {
-                    "name": "Leo\u271e",
-                    "points": 0
-                },
-                {
-                    "name": "BigJigglyDog",
-                    "points": 0
-                },
-                {
-                    "name": "MastaJones",
-                    "points": 0
-                },
-                {
-                    "name": "<c9>Jefe",
-                    "points": 0
-                },
-                {
-                    "name": "WZ",
-                    "points": 0
-                },
-                {
-                    "name": "ThisIsMe",
-                    "points": 0
-                },
-                {
-                    "name": "Kaden9",
-                    "points": 0
-                },
-                {
-                    "name": "Jazzydonut42",
-                    "points": 0
-                },
-                {
-                    "name": "daniel",
-                    "points": 0
-                },
-                {
-                    "name": "<c5>ki<c6>ng",
-                    "points": 0
-                },
-                {
-                    "name": "Joey7494",
-                    "points": 0
-                },
-                {
-                    "name": "Ho3eiN",
-                    "points": 0
-                },
-                {
-                    "name": "charamaya",
-                    "points": 0
-                },
-                {
-                    "name": "JEFF",
-                    "points": 100
-                },
-                {
-                    "name": "FarFoosa",
-                    "points": 100
-                },
-                {
-                    "name": "Buttluck",
-                    "points": 200
-                },
-                {
-                    "name": "King B",
-                    "points": 450
-                },
-                {
-                    "name": "jm.s561",
-                    "points": 500
-                },
-                {
-                    "name": "declanthepigeon",
-                    "points": 600
-                },
-                {
-                    "name": "slave",
-                    "points": 600
-                },
-                {
-                    "name": "eThAn",
-                    "points": 700
-                },
-                {
-                    "name": "da iz g",
-                    "points": 700
-                },
-                {
-                    "name": "Aevis",
-                    "points": 800
-                },
-                {
-                    "name": "frxsty",
-                    "points": 1400
-                },
-                {
-                    "name": "Lilboylee",
-                    "points": 800
-                },
-                {
-                    "name": "PapaGeg",
-                    "points": 850
-                },
-                {
-                    "name": "Captain Falcon",
-                    "points": 1000
-                },
-                {
-                    "name": "Bighomiequeso",
-                    "points": 1100
-                },
-                {
-                    "name": "PB_DINO3",
-                    "points": 1650
-                },
-                {
-                    "name": "jay#1",
-                    "points": 1675
-                },
-                {
-                    "name": "door041enormous",
-                    "points": 1400
-                },
-                {
-                    "name": "Adchang",
-                    "points": 1400
-                },
-                {
-                    "name": "Darth Yoda",
-                    "points": 1600
-                },
-                {
-                    "name": "Gideon",
-                    "points": 1650
-                },
-                {
-                    "name": "lew",
-                    "points": 1650
-                },
-                {
-                    "name": "FaelinJonez",
-                    "points": 1700
-                },
-                {
-                    "name": "Morlyn71",
-                    "points": 1850
-                },
-                {
-                    "name": "rebel",
-                    "points": 1900
-                },
-                {
-                    "name": "giannamomma",
-                    "points": 2100
-                },
-                {
-                    "name": "will-easy",
-                    "points": 2200
-                },
-                {
-                    "name": "cole",
-                    "points": 2300
-                },
-                {
-                    "name": "Aeon^Flux",
-                    "points": 2500
-                },
-                {
-                    "name": "<c6>Jayden",
-                    "points": 2500
-                },
-                {
-                    "name": "[Demon Days]",
-                    "points": 2500
-                },
-                {
-                    "name": "Chuy ;]",
-                    "points": 2525
-                },
-                {
-                    "name": "dogmonkey",
-                    "points": 2600
-                },
-                {
-                    "name": "genos",
-                    "points": 3000
-                },
-                {
-                    "name": "cjyd",
-                    "points": 3200
                 }
             ]
         }
