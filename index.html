@@ -631,6 +631,11 @@
     </div>
 
     <script>
+        // Global variables
+        let warData = {};
+        let currentMemberNames = new Set();
+        let currentMembersMap = new Map(); // Map of member name to their full data
+
         // Tab switching
         function switchTab(tabName, event) {
             // Update main tab buttons
@@ -676,6 +681,9 @@
                     `;
                     tbody.appendChild(tr);
                 });
+
+                // NOW load war data after members are loaded
+                loadWarData();
             })
             .catch(error => {
                 console.error('Error loading clan data:', error);
@@ -683,22 +691,20 @@
                     '<tr><td colspan="6" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
             });
 
-        // Load war data
-        let warData = {};
-        let currentMemberNames = new Set();
-        let currentMembersMap = new Map(); // Map of member name to their full data
-        
-        fetch('war_data.json')
-            .then(response => response.json())
-            .then(data => {
-                warData = data;
-                showWar(0); // Default to previous war
-            })
-            .catch(error => {
-                console.error('Error loading war data:', error);
-                document.querySelector('#warTable tbody').innerHTML = 
-                    '<tr><td colspan="4" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
-            });
+        // Separate function to load war data
+        function loadWarData() {
+            fetch('war_data.json')
+                .then(response => response.json())
+                .then(data => {
+                    warData = data;
+                    showWar(0); // Now this will work because currentMemberNames is populated
+                })
+                .catch(error => {
+                    console.error('Error loading war data:', error);
+                    document.querySelector('#warTable tbody').innerHTML = 
+                        '<tr><td colspan="4" style="text-align: center; color: #ff6b6b;">Error loading data</td></tr>';
+                });
+        }
 
         function showWar(warIndex) {
             // Update subtab buttons - this now works whether called from click or programmatically
