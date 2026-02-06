@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+from datetime import datetime
 
 # ======= CONFIG =======
 CLAN_TAG = "%23YQY9R8PP"  # Replace # with %23 for API URLs
@@ -8,6 +9,7 @@ CLAN_TAG_DECODED = "#YQY9R8PP"  # Decoded version for comparison
 API_KEY = os.getenv("CLASH_API_KEY")  # Must be set as an environment variable
 CLAN_OUTPUT = "clan_data.json"
 WAR_OUTPUT = "war_data.json"
+DONATION_OUTPUT = "donation_history.json"
 # =====================
 
 if not API_KEY:
@@ -79,3 +81,79 @@ else:
 with open(WAR_OUTPUT, "w") as f:
     json.dump(war_data, f, indent=4)
 print(f"Saved war data to {WAR_OUTPUT}")
+
+# ---- Handle Donation Tracking ----
+# Load existing donation history or create new one
+if os.path.exists(DONATION_OUTPUT):
+    with open(DONATION_OUTPUT, "r") as f:
+        donation_data = json.load(f)
+else:
+    donation_data = {
+        "trackingStartDate": datetime.now().isoformat(),
+        "weeklySnapshots": [],
+        "allTimeTotals": {}
+    }
+    print("Created new donation tracking file")
+
+# Get current donations from members
+current_donations = {}
+for member in members_data["items"]:
+    member_name = member["name"]
+    donations = member.get("donations", 0)
+    current_donations[member_name] = donations
+
+# Check if we should save a weekly snapshot
+# This should be run BEFORE Sunday 8pm EST (before reset)
+# You can modify this logic based on when you run the script
+current_time = datetime.now()
+should_save_snapshot = False
+
+# Option 1: Always save current week as "last week" 
+# (Assumes you run this script right before reset on Sunday)
+# Uncomment the line below if you want to force a snapshot every run
+# should_save_snapshot = True
+
+# Option 2: Check if we haven't saved a snapshot this week yet
+if donation_data["weeklySnapshots"]:
+    last_snapshot_date = donation_data["weeklySnapshots"][0]["date"]
+    last_snapshot_time = datetime.fromisoformat(last_snapshot_date)
+    days_since_last_snapshot = (current_time - last_snapshot_time).days
+    
+    # If it's been 6+ days since last snapshot, save a new one
+    # This assumes you run the script weekly
+    if days_since_last_snapshot >= 6:
+        should_save_snapshot = True
+else:
+    # No snapshots yet, save the first one
+    should_save_snapshot = True
+
+if should_save_snapshot:
+    # Save current donations as "last week"
+    weekly_snapshot = {
+        "date": current_time.isoformat(),
+        "donations": current_donations.copy()
+    }
+    
+    # Add to beginning of list (most recent first)
+    donation_data["weeklySnapshots"].insert(0, weekly_snapshot)
+    
+    # Keep only last 12 weeks of snapshots (3 months)
+    donation_data["weeklySnapshots"] = donation_data["weeklySnapshots"][:12]
+    
+    print(f"Saved weekly donation snapshot with {len(current_donations)} members")
+    
+    # Update all-time totals
+    for member_name, donations in current_donations.items():
+        if member_name in donation_data["allTimeTotals"]:
+            donation_data["allTimeTotals"][member_name] += donations
+        else:
+            donation_data["allTimeTotals"][member_name] = donations
+    
+    print(f"Updated all-time donation totals")
+else:
+    print(f"Skipped weekly snapshot (last snapshot was {days_since_last_snapshot} days ago)")
+
+# Save donation history
+with open(DONATION_OUTPUT, "w") as f:
+    json.dump(donation_data, f, indent=4)
+print(f"Saved donation history to {DONATION_OUTPUT}")
